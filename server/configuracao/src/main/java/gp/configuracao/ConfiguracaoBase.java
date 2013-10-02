@@ -1,19 +1,20 @@
 package gp.configuracao;
 
+import gp.discovery.DescobertaServicoConfigurada;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.datasift.dropwizard.curator.config.CuratorConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.yammer.dropwizard.client.JerseyClientConfiguration;
 import com.yammer.dropwizard.config.Configuration;
 import com.yammer.dropwizard.db.DatabaseConfiguration;
-import gp.discovery.DescobertaServicoConfigurada;
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 public class ConfiguracaoBase extends Configuration implements DescobertaServicoConfigurada {
 
-    @SuppressWarnings("FieldCanBeLocal")
     @NotEmpty
     @JsonProperty
     private String descricao = "Sem descricao";

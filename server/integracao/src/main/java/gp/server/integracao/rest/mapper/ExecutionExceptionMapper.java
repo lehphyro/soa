@@ -11,14 +11,14 @@ import javax.ws.rs.ext.Providers;
 @Provider
 public class ExecutionExceptionMapper implements ExceptionMapper<ExecutionException> {
 
-    @SuppressWarnings("WeakerAccess")
     @Context
     Providers providers;
 
     @Override
     @SuppressWarnings("unchecked")
     public Response toResponse(ExecutionException exception) {
-        ExceptionMapper mapper = providers.getExceptionMapper(exception.getCause().getClass());
+		@SuppressWarnings("rawtypes")
+		ExceptionMapper mapper = providers.getExceptionMapper(exception.getCause().getClass());
         if (mapper == null) {
             throw new IllegalStateException("Nenhum exception mapper encontrado para exception", exception);
         }

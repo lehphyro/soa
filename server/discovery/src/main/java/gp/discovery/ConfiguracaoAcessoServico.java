@@ -1,7 +1,8 @@
 package gp.discovery;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ConfiguracaoAcessoServico {
 
@@ -13,7 +14,6 @@ public class ConfiguracaoAcessoServico {
     @JsonProperty
     private String versao;
 
-    @SuppressWarnings("FieldCanBeLocal")
     @JsonProperty
     private boolean usarCache = false;
 

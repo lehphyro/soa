@@ -2,7 +2,7 @@ package gp.api.internal;
 
 public class Enums {
 
-    public static <T extends Enum & Identificado> T getEnum(int id, Class<T> klass) {
+	public static <T extends Enum<T> & Identificado> T getEnum(int id, Class<T> klass) {
         for (T t : klass.getEnumConstants()) {
             if (id == t.getId()) {
                 return t;

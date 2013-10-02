@@ -1,6 +1,7 @@
 package gp.database.binding;
 
 import gp.api.internal.Identificado;
+
 import org.skife.jdbi.v2.SQLStatement;
 import org.skife.jdbi.v2.sqlobject.Binder;
 import org.skife.jdbi.v2.sqlobject.BinderFactory;
@@ -26,7 +27,7 @@ public @interface BindDeepBean {
     public static class BeanBinderFactory implements BinderFactory {
 
         @Override
-        public Binder build(Annotation annotation) {
+        public Binder<BindDeepBean, Object> build(Annotation annotation) {
             return new Binder<BindDeepBean, Object>() {
                 @Override
                 public void bind(SQLStatement<?> q, BindDeepBean bind, Object arg) {
