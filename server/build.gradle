@@ -1,0 +1,10 @@
+project.ext.dropwizardVersion = '0.6.2'
+project.ext.dropwizardExtraVersion = '0.6.2-2'
+project.ext.curatorVersion = '1.3.3'
+
+subprojects {
+    apply plugin: 'java'
+
+    sourceCompatibility = '1.7'
+    targetCompatibility = '1.7'
+}

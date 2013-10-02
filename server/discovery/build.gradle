@@ -1,0 +1,12 @@
+configurations {
+    all*.exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+    all*.exclude group: 'log4j', module: 'log4j'
+}
+
+dependencies {
+    compile group: 'com.yammer.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
+    compile group: 'com.yammer.dropwizard', name: 'dropwizard-client', version: dropwizardVersion
+    compile group: 'com.datasift.dropwizard', name: 'dropwizard-extra-curator', version: dropwizardExtraVersion
+    compile group: 'com.netflix.curator', name: 'curator-framework', version: curatorVersion
+    compile group: 'com.netflix.curator', name: 'curator-x-discovery', version: curatorVersion
+}

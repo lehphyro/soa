@@ -1,0 +1,7 @@
+dependencies {
+	compile project(':server:discovery')
+    compile group: 'com.yammer.dropwizard', name: 'dropwizard-client', version: dropwizardVersion
+    compile group: 'com.yammer.dropwizard', name: 'dropwizard-jdbi', version: dropwizardVersion
+    compile group: 'com.netflix.hystrix', name: 'hystrix-core', version: '1.2.16'
+    compile group: 'com.netflix.hystrix', name: 'hystrix-metrics-event-stream', version: '1.2.16'
+}

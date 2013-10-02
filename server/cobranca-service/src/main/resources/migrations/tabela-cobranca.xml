@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="tabela-cobranca" author="leandro">
+		<createTable tableName="cobranca">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="gp" type="bigint">
+				<constraints nullable="false" references="gp(id)" foreignKeyName="fk-cobranca-gp" />
+			</column>
+			<column name="tipo" type="bigint">
+				<constraints nullable="false" references="tipo_cobranca(id)" foreignKeyName="fk-cobranca-tipo-cobranca" />
+			</column>
+			<column name="valor" type="integer">
+				<constraints nullable="false" />
+			</column>
+			<column name="periodo" type="numeric(6, 2)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	</changeSet>
+</databaseChangeLog>

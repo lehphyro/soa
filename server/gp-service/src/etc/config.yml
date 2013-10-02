@@ -1,0 +1,51 @@
+http:
+  port: 8080
+  adminPort: 8081
+  requestLog:
+    console:
+      enabled: false
+
+logging:
+  console:
+    timeZone: America/Sao_Paulo
+  loggers:
+    gp: DEBUG
+    org.apache.zookeeper: WARN
+    com.netflix.config: ERROR
+
+database:
+  driverClass: org.postgresql.Driver
+  user: postgres
+  password: root
+  url: jdbc:postgresql://localhost/gp
+
+httpClient:
+  timeout: 900ms
+
+curator:
+  ensemble:
+    namespace: descoberta
+
+servicoEndereco:
+  nome: endereco
+  versao: dev
+
+servicoContato:
+  nome: contato
+  versao: dev
+
+servicoCobranca:
+  nome: cobranca
+  versao: dev
+
+servicoWebsiteDivulgacao:
+  nome: website-divulgacao
+  versao: dev
+
+servicoWebsiteForum:
+  nome: website-forum
+  versao: dev
+
+servicoWebsitePessoal:
+  nome: website-pessoal
+  versao: dev

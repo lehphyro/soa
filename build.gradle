@@ -1,0 +1,13 @@
+allprojects {
+	apply plugin: 'eclipse'
+    group = 'lehphyro.gp'
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+// banner
+// http://patorjk.com/software/taag/#p=display&f=Doom&t=endereco
