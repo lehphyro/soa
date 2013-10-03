@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+
+	<changeSet id="tabela-contato" author="leandro">
+		<createTable tableName="contato">
+			<column name="id" type="bigint" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="tipo" type="bigint">
+				<constraints nullable="false" references="tipo_contato(id)" foreignKeyName="fk-contato-tipo-contato" />
+			</column>
+			<column name="pessoa" type="bigint">
+				<constraints nullable="false" references="pessoa(id)" foreignKeyName="fk-contato-pessoa" />
+			</column>
+			<column name="valor" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+		</createTable>
+	</changeSet>
+</databaseChangeLog>

@@ -19,7 +19,7 @@ public class Contato {
     private final long id;
 
     @JsonProperty
-    private final Pessoa gp;
+    private final Pessoa pessoa;
 
     @JsonProperty
     @NotEmpty
@@ -35,7 +35,7 @@ public class Contato {
 
     private Contato(Builder builder) {
         id = builder.id;
-        gp = builder.gp;
+        pessoa = builder.pessoa;
         valor = builder.valor;
         tipo = builder.tipo;
     }
@@ -44,8 +44,8 @@ public class Contato {
         return id;
     }
 
-    public Pessoa getGp() {
-        return gp;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
     public String getValor() {
@@ -60,7 +60,7 @@ public class Contato {
     public String toString() {
         return Objects.toStringHelper(this)
                 .add("id", id)
-                .add("gp", gp)
+                .add("pessoa", pessoa)
                 .add("valor", valor)
                 .add("tipo", tipo)
                 .toString();
@@ -85,7 +85,7 @@ public class Contato {
 
         long id;
 
-        Pessoa gp;
+        Pessoa pessoa;
 
         String valor;
 
@@ -96,7 +96,7 @@ public class Contato {
 
         public Builder(Contato v) {
             this.id = v.id;
-            this.gp = v.gp;
+            this.pessoa = v.pessoa;
             this.valor = v.valor;
             this.tipo = v.tipo;
 
@@ -107,8 +107,8 @@ public class Contato {
             return this;
         }
 
-        public Builder gp(Pessoa v) {
-            this.gp = v;
+        public Builder pessoa(Pessoa v) {
+            this.pessoa = v;
             return this;
         }
 
