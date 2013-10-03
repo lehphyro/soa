@@ -42,8 +42,7 @@ public class GpService extends Service<GpConfiguration> {
 		DBI dbi = dbiFactory.build(environment, configuration.getDatabaseConfiguration(), Constantes.POSTGRESQL);
 		Client client = new JerseyClientBuilder().using(configuration.getHttpClient()).using(environment).build();
 		environment.addResource(new GpResource(dbi, client, descobertaServico.getDescobridorServico(configuration.getServicoEndereco()),
-				descobertaServico.getDescobridorServico(configuration.getServicoContato()), descobertaServico
-						.getDescobridorServico(configuration.getServicoCobranca())));
+				descobertaServico.getDescobridorServico(configuration.getServicoContato())));
 	}
 
 	public static void main(String[] args) throws Exception {

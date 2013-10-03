@@ -17,7 +17,7 @@ public class Contato {
     private final long id;
 
     @JsonProperty
-    private final Gp gp;
+    private final Pessoa gp;
 
     @JsonProperty
     @NotEmpty
@@ -42,7 +42,7 @@ public class Contato {
         return id;
     }
 
-    public Gp getGp() {
+    public Pessoa getGp() {
         return gp;
     }
 
@@ -83,7 +83,7 @@ public class Contato {
 
         long id;
 
-        Gp gp;
+        Pessoa gp;
 
         String valor;
 
@@ -105,7 +105,7 @@ public class Contato {
             return this;
         }
 
-        public Builder gp(Gp v) {
+        public Builder gp(Pessoa v) {
             this.gp = v;
             return this;
         }

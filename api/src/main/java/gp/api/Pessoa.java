@@ -14,7 +14,7 @@ import com.google.common.collect.ImmutableList;
 
 @JsonPropertyOrder({ "id", "nome", "cobrancas", "contatos", "endereco" })
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Gp {
+public class Pessoa {
 
     @JsonProperty
     private final long id;
@@ -27,20 +27,16 @@ public class Gp {
     private final List<Contato> contatos;
 
     @JsonProperty
-    private final List<Cobranca> cobrancas;
-
-    @JsonProperty
     private final Endereco endereco;
 
-    public Gp(@JsonProperty("nome") String nome) {
+    public Pessoa(@JsonProperty("nome") String nome) {
         this(new Builder().nome(nome));
     }
 
-    private Gp(Builder builder) {
+    private Pessoa(Builder builder) {
         id = builder.id;
         nome = builder.nome;
         contatos = ImmutableList.copyOf(builder.contatos);
-        cobrancas = ImmutableList.copyOf(builder.cobrancas);
         endereco = builder.endereco;
     }
 
@@ -48,17 +44,15 @@ public class Gp {
         long id;
         String nome;
         List<Contato> contatos = new ArrayList<>();
-        List<Cobranca> cobrancas = new ArrayList<>();
         Endereco endereco;
 
         public Builder() {
         }
 
-        public Builder(Gp gp) {
+        public Builder(Pessoa gp) {
             id = gp.id;
             nome = gp.nome;
             contatos = new ArrayList<>(gp.contatos);
-            cobrancas = new ArrayList<>(gp.cobrancas);
             endereco = gp.endereco;
         }
 
@@ -77,11 +71,6 @@ public class Gp {
             return this;
         }
 
-        public Builder cobrancas(Collection<? extends Cobranca> v) {
-            this.cobrancas.addAll(v);
-            return this;
-        }
-
         public Builder contatos(Collection<? extends Contato> v) {
             this.contatos.addAll(v);
             return this;
@@ -92,8 +81,8 @@ public class Gp {
             return this;
         }
 
-        public Gp build() {
-            return new Gp(this);
+        public Pessoa build() {
+            return new Pessoa(this);
         }
     }
 
@@ -109,10 +98,6 @@ public class Gp {
         return contatos;
     }
 
-    public List<Cobranca> getCobrancas() {
-        return cobrancas;
-    }
-
     public Endereco getEndereco() {
         return endereco;
     }
@@ -123,7 +108,6 @@ public class Gp {
                 .add("id", id)
                 .add("nome", nome)
                 .add("contatos", contatos)
-                .add("cobrancas", cobrancas)
                 .add("endereco", endereco)
                 .toString();
     }

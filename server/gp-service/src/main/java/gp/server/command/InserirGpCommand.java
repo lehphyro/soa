@@ -1,15 +1,15 @@
 package gp.server.command;
 
-import gp.api.Gp;
+import gp.api.Pessoa;
 import gp.server.integracao.DatabaseCommand;
 import gp.server.repository.GpRepository;
 import org.skife.jdbi.v2.DBI;
 
 public class InserirGpCommand extends DatabaseCommand<Long> {
 
-    private final Gp gp;
+    private final Pessoa gp;
 
-    public InserirGpCommand(DBI dbi, Gp gp) {
+    public InserirGpCommand(DBI dbi, Pessoa gp) {
         super(Grupos.GP, Pools.DATABASE, dbi);
         this.gp = gp;
     }

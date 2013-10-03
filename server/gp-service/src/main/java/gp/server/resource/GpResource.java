@@ -1,18 +1,15 @@
 package gp.server.resource;
 
-import gp.api.Cobranca;
 import gp.api.Contato;
 import gp.api.Endereco;
-import gp.api.Gp;
+import gp.api.Pessoa;
 import gp.discovery.DescobridorServico;
 import gp.monitoring.Tipos;
 import gp.server.GpService;
 import gp.server.command.AtualizarEnderecoGpCommand;
-import gp.server.command.InserirCobrancaCommand;
 import gp.server.command.InserirContatoCommand;
 import gp.server.command.InserirEnderecoCommand;
 import gp.server.command.InserirGpCommand;
-import gp.server.command.ListarCobrancasCommand;
 import gp.server.command.ListarContatosCommand;
 import gp.server.command.RecuperarEnderecoCommand;
 import gp.server.command.RecuperarGpCommand;
@@ -54,22 +51,18 @@ public class GpResource {
 
     private final DescobridorServico descobridorContato;
 
-    private final DescobridorServico descobridorCobranca;
-
-	public GpResource(DBI dbi, Client client, DescobridorServico descobridorEndereco, DescobridorServico descobridorContato,
-			DescobridorServico descobridorCobranca) {
+	public GpResource(DBI dbi, Client client, DescobridorServico descobridorEndereco, DescobridorServico descobridorContato) {
         this.dbi = dbi;
         this.client = client;
         this.descobridorEndereco = descobridorEndereco;
         this.descobridorContato = descobridorContato;
-        this.descobridorCobranca = descobridorCobranca;
     }
 
     @GET
     @Timed(type = Tipos.TEMPO, group = GpService.NOME)
     @Metered(type = Tipos.CHAMADAS, group = GpService.NOME)
     @ExceptionMetered(type = Tipos.EXCEPTIONS, group = GpService.NOME)
-    public List<Gp> getAll() throws Exception {
+    public List<Pessoa> getAll() throws Exception {
         logger.info("Obtendo todas as gps");
         try (GpRepository repo = dbi.open(GpRepository.class)) {
             return repo.findAll();
@@ -81,17 +74,15 @@ public class GpResource {
     @Timed(type = Tipos.TEMPO, group = GpService.NOME)
     @Metered(type = Tipos.CHAMADAS, group = GpService.NOME)
     @ExceptionMetered(type = Tipos.EXCEPTIONS, group = GpService.NOME)
-    public Gp recuperar(@PathParam("id") long id) throws Exception {
+    public Pessoa recuperar(@PathParam("id") long id) throws Exception {
         logger.info("Recuperando gp com id [{}]", id);
 
-        Gp gp = new RecuperarGpCommand(dbi, id).execute();
+        Pessoa gp = new RecuperarGpCommand(dbi, id).execute();
         Future<Endereco> futureEndereco = new RecuperarEnderecoCommand(client, descobridorEndereco, id).queue();
-        Future<List<Cobranca>> futureCobrancas = new ListarCobrancasCommand(client, descobridorCobranca, id).queue();
         Future<List<Contato>> futureContatos = new ListarContatosCommand(client, descobridorContato, id).queue();
 
-        Gp.Builder builder = new Gp.Builder(gp);
+        Pessoa.Builder builder = new Pessoa.Builder(gp);
         builder.endereco(futureEndereco.get());
-        builder.cobrancas(futureCobrancas.get());
         builder.contatos(futureContatos.get());
 
         return builder.build();
@@ -101,7 +92,7 @@ public class GpResource {
     @Timed(type = Tipos.TEMPO, group = GpService.NOME)
     @Metered(type = Tipos.CHAMADAS, group = GpService.NOME)
     @ExceptionMetered(type = Tipos.EXCEPTIONS, group = GpService.NOME)
-    public long inserirGp(@Valid Gp gp) {
+    public long inserirGp(@Valid Pessoa gp) {
         logger.info("Inserindo gp com nome [{}]", gp.getNome());
         return new InserirGpCommand(dbi, gp).execute();
     }
@@ -125,18 +116,7 @@ public class GpResource {
     @ExceptionMetered(type = Tipos.EXCEPTIONS, group = GpService.NOME)
     public long inserirContato(@PathParam("id") final long id, @Valid final Contato contato) {
         logger.info("Inserindo contato [{}] para gp [{}]", contato, id);
-        Contato contatoComGp = new Contato.Builder(contato).gp(new Gp.Builder().id(id).build()).build();
+        Contato contatoComGp = new Contato.Builder(contato).gp(new Pessoa.Builder().id(id).build()).build();
         return new InserirContatoCommand(client, descobridorContato, contatoComGp).execute();
-    }
-
-    @Path("/{id}/cobranca")
-    @POST
-    @Timed(type = Tipos.TEMPO, group = GpService.NOME)
-    @Metered(type = Tipos.CHAMADAS, group = GpService.NOME)
-    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = GpService.NOME)
-    public long inserirCobranca(@PathParam("id") long id, @Valid Cobranca cobranca) {
-        logger.info("Inserindo cobranca [{}] para gp [{}]", cobranca, id);
-        Cobranca cobrancaComGp = new Cobranca.Builder(cobranca).gp(new Gp.Builder().id(id).build()).build();
-        return new InserirCobrancaCommand(client, descobridorCobranca, cobrancaComGp).execute();
     }
 }
