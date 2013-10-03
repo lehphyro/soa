@@ -1,7 +1,7 @@
 apply plugin: 'fatjar'
 apply plugin: 'application'
 
-mainClassName = 'gp.server.GpService'
+mainClassName = 'pessoa.server.PessoaService'
 version = 1
 project.ext.dropWizardConfig = 'src/etc/config.yml'
 

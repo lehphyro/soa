@@ -1,19 +1,10 @@
-package gp.server.resource;
+package pessoa.server.resource;
 
 import gp.api.Contato;
 import gp.api.Endereco;
 import gp.api.Pessoa;
 import gp.discovery.DescobridorServico;
 import gp.monitoring.Tipos;
-import gp.server.GpService;
-import gp.server.command.AtualizarEnderecoGpCommand;
-import gp.server.command.InserirContatoCommand;
-import gp.server.command.InserirEnderecoCommand;
-import gp.server.command.InserirGpCommand;
-import gp.server.command.ListarContatosCommand;
-import gp.server.command.RecuperarEnderecoCommand;
-import gp.server.command.RecuperarGpCommand;
-import gp.server.repository.GpRepository;
 
 import java.util.List;
 import java.util.concurrent.Future;
@@ -31,17 +22,27 @@ import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pessoa.server.PessoaService;
+import pessoa.server.command.AtualizarEnderecoCommand;
+import pessoa.server.command.InserirContatoCommand;
+import pessoa.server.command.InserirEnderecoCommand;
+import pessoa.server.command.InserirPessoaCommand;
+import pessoa.server.command.ListarContatosCommand;
+import pessoa.server.command.RecuperarEnderecoCommand;
+import pessoa.server.command.RecuperarPessoaCommand;
+import pessoa.server.repository.PessoaRepository;
+
 import com.sun.jersey.api.client.Client;
 import com.yammer.metrics.annotation.ExceptionMetered;
 import com.yammer.metrics.annotation.Metered;
 import com.yammer.metrics.annotation.Timed;
 
-@Path("/" + GpService.NOME)
+@Path("/" + PessoaService.NOME)
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-public class GpResource {
+public class PessoaResource {
 
-    private static final Logger logger = LoggerFactory.getLogger(GpResource.class);
+    private static final Logger logger = LoggerFactory.getLogger(PessoaResource.class);
 
     private final DBI dbi;
 
@@ -51,7 +52,7 @@ public class GpResource {
 
     private final DescobridorServico descobridorContato;
 
-	public GpResource(DBI dbi, Client client, DescobridorServico descobridorEndereco, DescobridorServico descobridorContato) {
+	public PessoaResource(DBI dbi, Client client, DescobridorServico descobridorEndereco, DescobridorServico descobridorContato) {
         this.dbi = dbi;
         this.client = client;
         this.descobridorEndereco = descobridorEndereco;
@@ -59,25 +60,25 @@ public class GpResource {
     }
 
     @GET
-    @Timed(type = Tipos.TEMPO, group = GpService.NOME)
-    @Metered(type = Tipos.CHAMADAS, group = GpService.NOME)
-    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = GpService.NOME)
+    @Timed(type = Tipos.TEMPO, group = PessoaService.NOME)
+    @Metered(type = Tipos.CHAMADAS, group = PessoaService.NOME)
+    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = PessoaService.NOME)
     public List<Pessoa> getAll() throws Exception {
-        logger.info("Obtendo todas as gps");
-        try (GpRepository repo = dbi.open(GpRepository.class)) {
+		logger.info("Obtendo todas as pessoas");
+        try (PessoaRepository repo = dbi.open(PessoaRepository.class)) {
             return repo.findAll();
         }
     }
 
     @Path("/{id}")
     @GET
-    @Timed(type = Tipos.TEMPO, group = GpService.NOME)
-    @Metered(type = Tipos.CHAMADAS, group = GpService.NOME)
-    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = GpService.NOME)
+    @Timed(type = Tipos.TEMPO, group = PessoaService.NOME)
+    @Metered(type = Tipos.CHAMADAS, group = PessoaService.NOME)
+    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = PessoaService.NOME)
     public Pessoa recuperar(@PathParam("id") long id) throws Exception {
-        logger.info("Recuperando gp com id [{}]", id);
+		logger.info("Recuperando pessoa com id [{}]", id);
 
-        Pessoa gp = new RecuperarGpCommand(dbi, id).execute();
+        Pessoa gp = new RecuperarPessoaCommand(dbi, id).execute();
         Future<Endereco> futureEndereco = new RecuperarEnderecoCommand(client, descobridorEndereco, id).queue();
         Future<List<Contato>> futureContatos = new ListarContatosCommand(client, descobridorContato, id).queue();
 
@@ -89,33 +90,33 @@ public class GpResource {
     }
 
     @POST
-    @Timed(type = Tipos.TEMPO, group = GpService.NOME)
-    @Metered(type = Tipos.CHAMADAS, group = GpService.NOME)
-    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = GpService.NOME)
+    @Timed(type = Tipos.TEMPO, group = PessoaService.NOME)
+    @Metered(type = Tipos.CHAMADAS, group = PessoaService.NOME)
+    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = PessoaService.NOME)
     public long inserirGp(@Valid Pessoa gp) {
-        logger.info("Inserindo gp com nome [{}]", gp.getNome());
-        return new InserirGpCommand(dbi, gp).execute();
+		logger.info("Inserindo pessoa com nome [{}]", gp.getNome());
+        return new InserirPessoaCommand(dbi, gp).execute();
     }
 
     @Path("/{id}/endereco")
     @POST
-    @Timed(type = Tipos.TEMPO, group = GpService.NOME)
-    @Metered(type = Tipos.CHAMADAS, group = GpService.NOME)
-    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = GpService.NOME)
+    @Timed(type = Tipos.TEMPO, group = PessoaService.NOME)
+    @Metered(type = Tipos.CHAMADAS, group = PessoaService.NOME)
+    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = PessoaService.NOME)
     public long inserirEndereco(@PathParam("id") final long id, @Valid final Endereco endereco) {
-        logger.info("Inserindo endereco [{}] para gp [{}]", endereco, id);
+		logger.info("Inserindo endereco [{}] para pessoa [{}]", endereco, id);
         long idEndereco = new InserirEnderecoCommand(client, descobridorEndereco, endereco).execute();
-        new AtualizarEnderecoGpCommand(dbi, id, idEndereco).execute();
+        new AtualizarEnderecoCommand(dbi, id, idEndereco).execute();
         return idEndereco;
     }
 
     @Path("/{id}/contato")
     @POST
-    @Timed(type = Tipos.TEMPO, group = GpService.NOME)
-    @Metered(type = Tipos.CHAMADAS, group = GpService.NOME)
-    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = GpService.NOME)
+    @Timed(type = Tipos.TEMPO, group = PessoaService.NOME)
+    @Metered(type = Tipos.CHAMADAS, group = PessoaService.NOME)
+    @ExceptionMetered(type = Tipos.EXCEPTIONS, group = PessoaService.NOME)
     public long inserirContato(@PathParam("id") final long id, @Valid final Contato contato) {
-        logger.info("Inserindo contato [{}] para gp [{}]", contato, id);
+		logger.info("Inserindo contato [{}] para pessoa [{}]", contato, id);
         Contato contatoComGp = new Contato.Builder(contato).gp(new Pessoa.Builder().id(id).build()).build();
         return new InserirContatoCommand(client, descobridorContato, contatoComGp).execute();
     }

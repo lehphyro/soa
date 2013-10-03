@@ -6,13 +6,13 @@
 		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-	<changeSet id="tabela-gp" author="leandro">
-		<createTable tableName="gp">
+	<changeSet id="tabela-pessoa" author="leandro">
+		<createTable tableName="pessoa">
 			<column name="id" type="bigint" autoIncrement="true">
 				<constraints primaryKey="true" nullable="false" />
 			</column>
 			<column name="endereco" type="bigint">
-				<constraints references="endereco(id)" foreignKeyName="fk-gp-endereco" />
+				<constraints references="endereco(id)" foreignKeyName="fk-pessoa-endereco" />
 			</column>
 			<column name="nome" type="varchar(255)">
 				<constraints nullable="false" />

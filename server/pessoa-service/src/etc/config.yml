@@ -17,7 +17,7 @@ database:
   driverClass: org.postgresql.Driver
   user: postgres
   password: root
-  url: jdbc:postgresql://localhost/gp
+  url: jdbc:postgresql://localhost/pessoa
 
 httpClient:
   timeout: 900ms
@@ -32,20 +32,4 @@ servicoEndereco:
 
 servicoContato:
   nome: contato
-  versao: dev
-
-servicoCobranca:
-  nome: cobranca
-  versao: dev
-
-servicoWebsiteDivulgacao:
-  nome: website-divulgacao
-  versao: dev
-
-servicoWebsiteForum:
-  nome: website-forum
-  versao: dev
-
-servicoWebsitePessoal:
-  nome: website-pessoal
   versao: dev

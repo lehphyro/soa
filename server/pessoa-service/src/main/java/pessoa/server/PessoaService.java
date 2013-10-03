@@ -1,11 +1,12 @@
-package gp.server;
+package pessoa.server;
 
 import gp.database.Constantes;
 import gp.discovery.BundleDescobertaServico;
 import gp.server.integracao.BundleIntegracao;
-import gp.server.resource.GpResource;
 
 import org.skife.jdbi.v2.DBI;
+
+import pessoa.server.resource.PessoaResource;
 
 import com.sun.jersey.api.client.Client;
 import com.yammer.dropwizard.Service;
@@ -16,18 +17,18 @@ import com.yammer.dropwizard.db.DatabaseConfiguration;
 import com.yammer.dropwizard.jdbi.DBIFactory;
 import com.yammer.dropwizard.migrations.MigrationsBundle;
 
-public class GpService extends Service<GpConfiguration> {
+public class PessoaService extends Service<PessoaConfiguration> {
 
-	public static final String NOME = "gp";
+	public static final String NOME = "pessoa";
 
 	private BundleDescobertaServico descobertaServico;
 
 	@Override
-	public void initialize(Bootstrap<GpConfiguration> bootstrap) {
+	public void initialize(Bootstrap<PessoaConfiguration> bootstrap) {
 		bootstrap.setName(NOME);
-		bootstrap.addBundle(new MigrationsBundle<GpConfiguration>() {
+		bootstrap.addBundle(new MigrationsBundle<PessoaConfiguration>() {
 			@Override
-			public DatabaseConfiguration getDatabaseConfiguration(GpConfiguration configuration) {
+			public DatabaseConfiguration getDatabaseConfiguration(PessoaConfiguration configuration) {
 				return configuration.getDatabaseConfiguration();
 			}
 		});
@@ -37,15 +38,15 @@ public class GpService extends Service<GpConfiguration> {
 	}
 
 	@Override
-	public void run(GpConfiguration configuration, Environment environment) throws Exception {
+	public void run(PessoaConfiguration configuration, Environment environment) throws Exception {
 		DBIFactory dbiFactory = new DBIFactory();
 		DBI dbi = dbiFactory.build(environment, configuration.getDatabaseConfiguration(), Constantes.POSTGRESQL);
 		Client client = new JerseyClientBuilder().using(configuration.getHttpClient()).using(environment).build();
-		environment.addResource(new GpResource(dbi, client, descobertaServico.getDescobridorServico(configuration.getServicoEndereco()),
+		environment.addResource(new PessoaResource(dbi, client, descobertaServico.getDescobridorServico(configuration.getServicoEndereco()),
 				descobertaServico.getDescobridorServico(configuration.getServicoContato())));
 	}
 
 	public static void main(String[] args) throws Exception {
-		new GpService().run(args);
+		new PessoaService().run(args);
 	}
 }

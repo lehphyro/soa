@@ -1,4 +1,4 @@
-package gp.server.command;
+package pessoa.server.command;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
