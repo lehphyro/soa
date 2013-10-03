@@ -1,10 +1,9 @@
 package pessoa.server.command;
 
-import gp.server.integracao.DatabaseCommand;
-
 import org.skife.jdbi.v2.DBI;
 
 import pessoa.server.repository.PessoaRepository;
+import server.integracao.DatabaseCommand;
 
 public class AtualizarEnderecoCommand extends DatabaseCommand<Void> {
 

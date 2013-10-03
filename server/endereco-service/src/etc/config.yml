@@ -17,7 +17,7 @@ database:
   driverClass: org.postgresql.Driver
   user: postgres
   password: root
-  url: jdbc:postgresql://localhost/gp
+  url: jdbc:postgresql://localhost/pessoa
 
 httpClient:
   timeout: 900ms

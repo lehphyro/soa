@@ -1,11 +1,5 @@
 package pessoa.server.resource;
 
-import gp.api.Contato;
-import gp.api.Endereco;
-import gp.api.Pessoa;
-import gp.discovery.DescobridorServico;
-import gp.monitoring.Tipos;
-
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -17,6 +11,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import monitoring.Tipos;
 
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
@@ -31,11 +27,16 @@ import pessoa.server.command.ListarContatosCommand;
 import pessoa.server.command.RecuperarEnderecoCommand;
 import pessoa.server.command.RecuperarPessoaCommand;
 import pessoa.server.repository.PessoaRepository;
+import api.Contato;
+import api.Endereco;
+import api.Pessoa;
 
 import com.sun.jersey.api.client.Client;
 import com.yammer.metrics.annotation.ExceptionMetered;
 import com.yammer.metrics.annotation.Metered;
 import com.yammer.metrics.annotation.Timed;
+
+import discovery.DescobridorServico;
 
 @Path("/" + PessoaService.NOME)
 @Produces(MediaType.APPLICATION_JSON)

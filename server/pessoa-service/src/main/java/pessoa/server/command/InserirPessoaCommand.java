@@ -1,11 +1,10 @@
 package pessoa.server.command;
 
-import gp.api.Pessoa;
-import gp.server.integracao.DatabaseCommand;
-
 import org.skife.jdbi.v2.DBI;
 
+import api.Pessoa;
 import pessoa.server.repository.PessoaRepository;
+import server.integracao.DatabaseCommand;
 
 public class InserirPessoaCommand extends DatabaseCommand<Long> {
 

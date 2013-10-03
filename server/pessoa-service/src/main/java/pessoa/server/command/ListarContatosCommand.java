@@ -1,12 +1,16 @@
 package pessoa.server.command;
 
+import api.Contato;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.GenericType;
-import gp.api.Contato;
-import gp.discovery.DescobridorServico;
-import gp.server.integracao.ServiceCommand;
+
+import discovery.DescobridorServico;
 
 import javax.ws.rs.core.MediaType;
+
+import server.integracao.ServiceCommand;
+
 import java.util.List;
 
 public class ListarContatosCommand extends ServiceCommand<List<Contato>> {

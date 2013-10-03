@@ -1,7 +1,5 @@
 package pessoa.server.repository;
 
-import gp.api.Pessoa;
-
 import java.util.List;
 
 import org.skife.jdbi.v2.sqlobject.Bind;
@@ -11,6 +9,8 @@ import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 import org.skife.jdbi.v2.sqlobject.customizers.RegisterMapper;
 import org.skife.jdbi.v2.sqlobject.mixins.Transactional;
+
+import api.Pessoa;
 
 @RegisterMapper(PessoaMapper.class)
 public interface PessoaRepository extends Transactional<PessoaRepository>, AutoCloseable {

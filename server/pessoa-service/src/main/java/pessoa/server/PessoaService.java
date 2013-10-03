@@ -1,12 +1,9 @@
 package pessoa.server;
 
-import gp.database.Constantes;
-import gp.discovery.BundleDescobertaServico;
-import gp.server.integracao.BundleIntegracao;
-
 import org.skife.jdbi.v2.DBI;
 
 import pessoa.server.resource.PessoaResource;
+import server.integracao.BundleIntegracao;
 
 import com.sun.jersey.api.client.Client;
 import com.yammer.dropwizard.Service;
@@ -16,6 +13,9 @@ import com.yammer.dropwizard.config.Environment;
 import com.yammer.dropwizard.db.DatabaseConfiguration;
 import com.yammer.dropwizard.jdbi.DBIFactory;
 import com.yammer.dropwizard.migrations.MigrationsBundle;
+
+import database.Constantes;
+import discovery.BundleDescobertaServico;
 
 public class PessoaService extends Service<PessoaConfiguration> {
 

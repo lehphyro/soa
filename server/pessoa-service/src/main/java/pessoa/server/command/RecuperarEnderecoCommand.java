@@ -1,13 +1,16 @@
 package pessoa.server.command;
 
+import api.Endereco;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.UniformInterfaceException;
-import gp.api.Endereco;
-import gp.discovery.DescobridorServico;
-import gp.server.integracao.ServiceCommand;
+
+import discovery.DescobridorServico;
 
 import javax.ws.rs.core.MediaType;
+
+import server.integracao.ServiceCommand;
 
 public class RecuperarEnderecoCommand extends ServiceCommand<Endereco> {
 

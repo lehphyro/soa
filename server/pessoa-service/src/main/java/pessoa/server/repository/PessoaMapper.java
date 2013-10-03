@@ -1,8 +1,9 @@
 package pessoa.server.repository;
 
-import gp.api.Pessoa;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.ResultSetMapper;
+
+import api.Pessoa;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

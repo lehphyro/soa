@@ -1,7 +1,7 @@
 apply plugin: 'fatjar'
 apply plugin: 'application'
 
-mainClassName = 'gp.server.endereco.EnderecoService'
+mainClassName = 'server.endereco.EnderecoService'
 version = 1
 project.ext.dropWizardConfig = 'src/etc/config.yml'
 

@@ -1,12 +1,12 @@
 package pessoa.server;
 
-import gp.configuracao.ConfiguracaoBase;
-import gp.discovery.ConfiguracaoAcessoServico;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import configuracao.ConfiguracaoBase;
+import discovery.ConfiguracaoAcessoServico;
 
 public class PessoaConfiguration extends ConfiguracaoBase {
 
