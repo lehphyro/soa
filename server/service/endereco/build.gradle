@@ -1,0 +1,7 @@
+version = 1
+fatJar {
+    manifest {
+        attributes 'Main-Class': 'server.endereco.EnderecoService'
+        attributes 'Implementation-Version': version
+    }
+}

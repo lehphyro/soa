@@ -1,6 +1,6 @@
 allprojects {
 	apply plugin: 'eclipse'
-    group = 'lehphyro.gp'
+    group = 'soa'
 }
 
 subprojects {

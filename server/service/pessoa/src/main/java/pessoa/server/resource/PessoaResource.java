@@ -118,7 +118,7 @@ public class PessoaResource {
     @ExceptionMetered(type = Tipos.EXCEPTIONS, group = PessoaService.NOME)
     public long inserirContato(@PathParam("id") final long id, @Valid final Contato contato) {
 		logger.info("Inserindo contato [{}] para pessoa [{}]", contato, id);
-        Contato contatoComGp = new Contato.Builder(contato).pessoa(new Pessoa.Builder().id(id).build()).build();
-        return new InserirContatoCommand(client, descobridorContato, contatoComGp).execute();
+        Contato contatoComPessoa = new Contato.Builder(contato).pessoa(new Pessoa.Builder().id(id).build()).build();
+        return new InserirContatoCommand(client, descobridorContato, contatoComPessoa).execute();
     }
 }
