@@ -43,9 +43,9 @@ public class ContatoResource {
     @Timed(type = Tipos.TEMPO, group = ContatoService.NOME)
     @Metered(type = Tipos.CHAMADAS, group = ContatoService.NOME)
     @ExceptionMetered(type = Tipos.EXCEPTIONS, group = ContatoService.NOME)
-    public List<Contato> listarPorGp(@QueryParam("gp") long gp) {
-        logger.info("Listando contatos da gp [{}]", gp);
-        return new ListarContatoCommand(dbi, gp).execute();
+	public List<Contato> listarPorGp(@QueryParam("pessoa") long pessoa) {
+		logger.info("Listando contatos da pessoa [{}]", pessoa);
+		return new ListarContatoCommand(dbi, pessoa).execute();
     }
 
     @POST

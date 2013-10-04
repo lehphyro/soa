@@ -79,11 +79,11 @@ public class PessoaResource {
     public Pessoa recuperar(@PathParam("id") long id) throws Exception {
 		logger.info("Recuperando pessoa com id [{}]", id);
 
-        Pessoa gp = new RecuperarPessoaCommand(dbi, id).execute();
+        Pessoa pessoa = new RecuperarPessoaCommand(dbi, id).execute();
         Future<Endereco> futureEndereco = new RecuperarEnderecoCommand(client, descobridorEndereco, id).queue();
         Future<List<Contato>> futureContatos = new ListarContatosCommand(client, descobridorContato, id).queue();
 
-        Pessoa.Builder builder = new Pessoa.Builder(gp);
+        Pessoa.Builder builder = new Pessoa.Builder(pessoa);
         builder.endereco(futureEndereco.get());
         builder.contatos(futureContatos.get());
 
