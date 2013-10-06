@@ -1,7 +1,8 @@
+mainClassName = 'server.contato.ContatoService'
 version = 1
 fatJar {
     manifest {
-        attributes 'Main-Class': 'server.contato.ContatoService'
+        attributes 'Main-Class': mainClassName
         attributes 'Implementation-Version': version
     }
 }

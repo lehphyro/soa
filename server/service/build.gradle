@@ -46,7 +46,7 @@ subprojects {
 
 	// Configure the run task to start the Dropwizard service
 	run {
-	    args 'server', dropWizardConfig
+	    args 'run', dropWizardConfig
 	}
 
 	task wrapper(type: Wrapper) {
