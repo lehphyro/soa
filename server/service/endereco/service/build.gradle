@@ -1,0 +1,16 @@
+mainClassName = 'endereco.service.EnderecoService'
+version = 1
+dependencies {
+    compile project(':server:service:endereco:api')
+}
+fatJar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+        attributes 'Implementation-Version': version
+    }
+}
+eclipse {
+	project {
+		name = 'endereco-service'
+	}
+}

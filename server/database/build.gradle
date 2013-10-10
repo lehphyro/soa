@@ -1,4 +1,3 @@
 dependencies {
-    compile project(":api")
     compile group: 'com.yammer.dropwizard', name: 'dropwizard-jdbi', version: dropwizardVersion
 }

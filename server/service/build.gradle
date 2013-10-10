@@ -16,7 +16,6 @@ subprojects {
 	project.ext.dropWizardConfig = 'src/etc/config.yml'
 
 	dependencies {
-	    compile project(':api')
 	    compile project(':server:configuracao')
 	    compile project(':server:database')
 		compile project(':server:discovery')

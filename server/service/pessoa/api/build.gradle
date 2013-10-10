@@ -1,0 +1,9 @@
+dependencies {
+    compile project(':server:service:contato:api')
+    compile project(':server:service:endereco:api')
+}
+eclipse {
+	project {
+		name = 'pessoa-api'
+	}
+}

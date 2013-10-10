@@ -1,1 +1,1 @@
-include 'api', 'server:configuracao', 'server:database', 'server:discovery', 'server:integracao', 'server:monitoring', 'server:service:contato', 'server:service:endereco', 'server:service:pessoa'
+include 'server:configuracao', 'server:database', 'server:discovery', 'server:integracao', 'server:monitoring', 'server:service:contato', 'server:service:contato:api', 'server:service:contato:service', 'server:service:endereco', 'server:service:endereco:api', 'server:service:endereco:service', 'server:service:pessoa', 'server:service:pessoa:api', 'server:service:pessoa:service'

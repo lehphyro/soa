@@ -1,8 +1,0 @@
-mainClassName = 'endereco.server.EnderecoService'
-version = 1
-fatJar {
-    manifest {
-        attributes 'Main-Class': mainClassName
-        attributes 'Implementation-Version': version
-    }
-}

@@ -1,0 +1,16 @@
+mainClassName = 'contato.service.ContatoService'
+version = 1
+dependencies {
+    compile project(':server:service:contato:api')
+}
+fatJar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+        attributes 'Implementation-Version': version
+    }
+}
+eclipse {
+	project {
+		name = 'contato-service'
+	}
+}

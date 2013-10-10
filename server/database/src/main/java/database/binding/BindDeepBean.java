@@ -1,21 +1,23 @@
 package database.binding;
 
-import org.skife.jdbi.v2.SQLStatement;
-import org.skife.jdbi.v2.sqlobject.Binder;
-import org.skife.jdbi.v2.sqlobject.BinderFactory;
-import org.skife.jdbi.v2.sqlobject.BindingAnnotation;
-
-import api.internal.Identificado;
-
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.annotation.*;
+import java.lang.annotation.Annotation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.util.Collection;
 import java.util.Objects;
+
+import org.skife.jdbi.v2.SQLStatement;
+import org.skife.jdbi.v2.sqlobject.Binder;
+import org.skife.jdbi.v2.sqlobject.BinderFactory;
+import org.skife.jdbi.v2.sqlobject.BindingAnnotation;
 
 @BindingAnnotation(BindDeepBean.BeanBinderFactory.class)
 @Retention(RetentionPolicy.RUNTIME)
@@ -51,9 +53,7 @@ public @interface BindDeepBean {
                     for (PropertyDescriptor prop : props) {
                         Class<?> type = prop.getPropertyType();
                         if (type != null && prop.getReadMethod() != null && obj != null) {
-                            if (Identificado.class.isAssignableFrom(type)) {
-                                q.bind(prefix + prop.getName(), ((Identificado) prop.getReadMethod().invoke(obj)).getId());
-                            } else if (URI.class.isAssignableFrom(type)) {
+							if (URI.class.isAssignableFrom(type)) {
                                 q.bind(prefix + prop.getName(), Objects.toString(prop.getReadMethod().invoke(obj), null));
                             } else if (type.isArray() || type.isEnum() || type.isPrimitive() || String.class.isAssignableFrom(type) ||
                                 Class.class.isAssignableFrom(type) || Collection.class.isAssignableFrom(type)) {
