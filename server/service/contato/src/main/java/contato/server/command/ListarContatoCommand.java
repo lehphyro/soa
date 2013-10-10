@@ -1,10 +1,10 @@
-package server.contato.command;
+package contato.server.command;
 
 import java.util.List;
 
 import org.skife.jdbi.v2.DBI;
 
-import server.contato.repository.ContatoRepository;
+import contato.server.repository.ContatoRepository;
 import server.integracao.DatabaseCommand;
 import api.Contato;
 

@@ -1,7 +1,7 @@
-package server.contato.command;
+package endereco.server.command;
 
 import com.netflix.hystrix.HystrixCommandGroupKey;
 
 public enum Grupos implements HystrixCommandGroupKey {
-    CONTATO
+    ENDERECO
 }

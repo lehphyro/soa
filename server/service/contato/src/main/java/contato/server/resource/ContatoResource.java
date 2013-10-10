@@ -1,4 +1,4 @@
-package server.contato.resource;
+package contato.server.resource;
 
 import java.util.List;
 
@@ -17,14 +17,15 @@ import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import server.contato.ContatoService;
-import server.contato.command.InserirContatoCommand;
-import server.contato.command.ListarContatoCommand;
 import api.Contato;
 
 import com.yammer.metrics.annotation.ExceptionMetered;
 import com.yammer.metrics.annotation.Metered;
 import com.yammer.metrics.annotation.Timed;
+
+import contato.server.ContatoService;
+import contato.server.command.InserirContatoCommand;
+import contato.server.command.ListarContatoCommand;
 
 @Path("/" + ContatoService.NOME)
 @Produces(MediaType.APPLICATION_JSON)

@@ -9,7 +9,7 @@ logging:
   console:
     timeZone: America/Sao_Paulo
   loggers:
-    gp: DEBUG
+    contato.server: DEBUG
     org.apache.zookeeper: WARN
     com.netflix.config: ERROR
 

@@ -1,4 +1,4 @@
-package server.contato.command;
+package endereco.server.command;
 
 import com.netflix.hystrix.HystrixThreadPoolKey;
 

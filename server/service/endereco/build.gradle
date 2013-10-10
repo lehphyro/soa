@@ -1,4 +1,4 @@
-mainClassName = 'server.endereco.EnderecoService'
+mainClassName = 'endereco.server.EnderecoService'
 version = 1
 fatJar {
     manifest {

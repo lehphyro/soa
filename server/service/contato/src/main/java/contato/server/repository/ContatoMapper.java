@@ -1,4 +1,4 @@
-package server.contato.repository;
+package contato.server.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

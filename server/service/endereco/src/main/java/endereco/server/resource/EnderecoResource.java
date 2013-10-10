@@ -1,4 +1,4 @@
-package server.endereco.resource;
+package endereco.server.resource;
 
 import api.Endereco;
 
@@ -6,15 +6,14 @@ import com.yammer.metrics.annotation.ExceptionMetered;
 import com.yammer.metrics.annotation.Metered;
 import com.yammer.metrics.annotation.Timed;
 
+import endereco.server.EnderecoService;
+import endereco.server.command.InserirEnderecoCommand;
+import endereco.server.command.RecuperarEnderecoCommand;
 import monitoring.Tipos;
 
 import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import server.endereco.EnderecoService;
-import server.endereco.command.InserirEnderecoCommand;
-import server.endereco.command.RecuperarEnderecoCommand;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;

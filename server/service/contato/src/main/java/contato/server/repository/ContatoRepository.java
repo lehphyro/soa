@@ -1,4 +1,4 @@
-package server.contato.repository;
+package contato.server.repository;
 
 import java.util.List;
 

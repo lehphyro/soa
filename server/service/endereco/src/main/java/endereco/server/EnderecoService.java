@@ -1,9 +1,4 @@
-package server.contato;
-
-import org.skife.jdbi.v2.DBI;
-
-import server.contato.resource.ContatoResource;
-import server.integracao.BundleIntegracao;
+package endereco.server;
 
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;
@@ -15,10 +10,15 @@ import com.yammer.dropwizard.migrations.MigrationsBundle;
 import configuracao.ConfiguracaoBase;
 import database.Constantes;
 import discovery.BundleDescobertaServico;
+import endereco.server.resource.EnderecoResource;
 
-public class ContatoService extends Service<ConfiguracaoBase> {
+import org.skife.jdbi.v2.DBI;
 
-    public static final String NOME = "contato";
+import server.integracao.BundleIntegracao;
+
+public class EnderecoService extends Service<ConfiguracaoBase> {
+
+    public static final String NOME = "endereco";
 
     @Override
     public void initialize(Bootstrap<ConfiguracaoBase> bootstrap) {
@@ -37,10 +37,10 @@ public class ContatoService extends Service<ConfiguracaoBase> {
     public void run(ConfiguracaoBase configuration, Environment environment) throws Exception {
         DBIFactory dbiFactory = new DBIFactory();
         DBI dbi = dbiFactory.build(environment, configuration.getDatabaseConfiguration(), Constantes.POSTGRESQL);
-        environment.addResource(new ContatoResource(dbi));
+        environment.addResource(new EnderecoResource(dbi));
     }
 
     public static void main(String[] args) throws Exception {
-        new ContatoService().run(args);
+        new EnderecoService().run(args);
     }
 }

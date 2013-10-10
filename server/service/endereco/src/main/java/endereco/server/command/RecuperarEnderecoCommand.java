@@ -1,9 +1,9 @@
-package server.endereco.command;
+package endereco.server.command;
 
 import org.skife.jdbi.v2.DBI;
 
+import endereco.server.repository.EnderecoRepository;
 import api.Endereco;
-import server.endereco.repository.EnderecoRepository;
 import server.integracao.DatabaseCommand;
 
 public class RecuperarEnderecoCommand extends DatabaseCommand<Endereco> {
