@@ -1,15 +1,16 @@
 package api;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import api.internal.Identificado;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.google.common.base.Objects;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.validation.constraints.NotNull;
+import com.google.common.base.Optional;
 
 @JsonPropertyOrder({ "id", "tipo", "valor" })
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
@@ -74,6 +75,15 @@ public class Contato {
         private Tipo(int id) {
             this.id = id;
         }
+
+		public static Optional<Tipo> valueOf(int i) {
+			for (Tipo tipo : values()) {
+				if (tipo.id == i) {
+					return Optional.of(tipo);
+				}
+			}
+			return Optional.absent();
+		}
 
         @Override
         public int getId() {
