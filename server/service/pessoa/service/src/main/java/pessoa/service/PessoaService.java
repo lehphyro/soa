@@ -1,8 +1,8 @@
-package pessoa.server;
+package pessoa.service;
 
 import org.skife.jdbi.v2.DBI;
 
-import pessoa.server.resource.PessoaResource;
+import pessoa.service.resource.PessoaResource;
 import server.integracao.BundleIntegracao;
 
 import com.sun.jersey.api.client.Client;
@@ -14,7 +14,6 @@ import com.yammer.dropwizard.db.DatabaseConfiguration;
 import com.yammer.dropwizard.jdbi.DBIFactory;
 import com.yammer.dropwizard.migrations.MigrationsBundle;
 
-import database.Constantes;
 import discovery.BundleDescobertaServico;
 
 public class PessoaService extends Service<PessoaConfiguration> {
@@ -40,7 +39,7 @@ public class PessoaService extends Service<PessoaConfiguration> {
 	@Override
 	public void run(PessoaConfiguration configuration, Environment environment) throws Exception {
 		DBIFactory dbiFactory = new DBIFactory();
-		DBI dbi = dbiFactory.build(environment, configuration.getDatabaseConfiguration(), Constantes.POSTGRESQL);
+		DBI dbi = dbiFactory.build(environment, configuration.getDatabaseConfiguration(), "postgresql");
 		Client client = new JerseyClientBuilder().using(configuration.getHttpClient()).using(environment).build();
 		environment.addResource(new PessoaResource(dbi, client, descobertaServico.getDescobridorServico(configuration.getServicoEndereco()),
 				descobertaServico.getDescobridorServico(configuration.getServicoContato())));

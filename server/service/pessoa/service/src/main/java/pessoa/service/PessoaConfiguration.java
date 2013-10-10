@@ -1,4 +1,4 @@
-package pessoa.server;
+package pessoa.service;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

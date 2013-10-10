@@ -13,7 +13,6 @@ import com.yammer.dropwizard.migrations.MigrationsBundle;
 
 import configuracao.ConfiguracaoBase;
 import contato.service.resource.ContatoResource;
-import database.Constantes;
 import discovery.BundleDescobertaServico;
 
 public class ContatoService extends Service<ConfiguracaoBase> {
@@ -36,7 +35,7 @@ public class ContatoService extends Service<ConfiguracaoBase> {
     @Override
     public void run(ConfiguracaoBase configuration, Environment environment) throws Exception {
         DBIFactory dbiFactory = new DBIFactory();
-        DBI dbi = dbiFactory.build(environment, configuration.getDatabaseConfiguration(), Constantes.POSTGRESQL);
+		DBI dbi = dbiFactory.build(environment, configuration.getDatabaseConfiguration(), "postgresql");
         environment.addResource(new ContatoResource(dbi));
     }
 

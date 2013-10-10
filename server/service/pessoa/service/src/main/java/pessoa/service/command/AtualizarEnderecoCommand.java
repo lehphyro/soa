@@ -1,8 +1,8 @@
-package pessoa.server.command;
+package pessoa.service.command;
 
 import org.skife.jdbi.v2.DBI;
 
-import pessoa.server.repository.PessoaRepository;
+import pessoa.service.repository.PessoaRepository;
 import server.integracao.DatabaseCommand;
 
 import com.netflix.hystrix.HystrixCommandGroupKey;

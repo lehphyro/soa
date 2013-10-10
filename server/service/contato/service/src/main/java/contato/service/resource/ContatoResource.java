@@ -52,8 +52,8 @@ public class ContatoResource {
     @Timed(type = Tipos.TEMPO, group = ContatoService.NOME)
     @Metered(type = Tipos.CHAMADAS, group = ContatoService.NOME)
     @ExceptionMetered(type = Tipos.EXCEPTIONS, group = ContatoService.NOME)
-    public long inserir(@Valid final Contato contato) {
+	public long inserir(@Valid final Contato contato, @QueryParam("pessoa") long pessoa) {
         logger.info("Inserindo contato [{}]", contato);
-        return new InserirContatoCommand(dbi, contato).execute();
+		return new InserirContatoCommand(dbi, contato, pessoa).execute();
     }
 }

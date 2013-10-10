@@ -1,4 +1,4 @@
-package pessoa.server.repository;
+package pessoa.service.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

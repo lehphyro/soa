@@ -1,4 +1,4 @@
-package pessoa.server.resource;
+package pessoa.service.resource;
 
 import java.util.List;
 import java.util.concurrent.Future;
@@ -19,11 +19,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import pessoa.api.Pessoa;
-import pessoa.server.PessoaService;
-import pessoa.server.command.AtualizarEnderecoCommand;
-import pessoa.server.command.InserirPessoaCommand;
-import pessoa.server.command.RecuperarPessoaCommand;
-import pessoa.server.repository.PessoaRepository;
+import pessoa.service.PessoaService;
+import pessoa.service.command.AtualizarEnderecoCommand;
+import pessoa.service.command.InserirPessoaCommand;
+import pessoa.service.command.RecuperarPessoaCommand;
+import pessoa.service.repository.PessoaRepository;
 
 import com.sun.jersey.api.client.Client;
 import com.yammer.metrics.annotation.ExceptionMetered;
@@ -118,7 +118,6 @@ public class PessoaResource {
     @ExceptionMetered(type = Tipos.EXCEPTIONS, group = PessoaService.NOME)
     public long inserirContato(@PathParam("id") final long id, @Valid final Contato contato) {
 		logger.info("Inserindo contato [{}] para pessoa [{}]", contato, id);
-        Contato contatoComPessoa = new Contato.Builder(contato).pessoa(new Pessoa.Builder().id(id).build()).build();
-        return new InserirContatoCommand(client, descobridorContato, contatoComPessoa).execute();
+		return new InserirContatoCommand(client, descobridorContato, contato, id).execute();
     }
 }

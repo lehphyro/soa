@@ -1,5 +1,9 @@
 package endereco.service;
 
+import org.skife.jdbi.v2.DBI;
+
+import server.integracao.BundleIntegracao;
+
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
@@ -8,13 +12,8 @@ import com.yammer.dropwizard.jdbi.DBIFactory;
 import com.yammer.dropwizard.migrations.MigrationsBundle;
 
 import configuracao.ConfiguracaoBase;
-import database.Constantes;
 import discovery.BundleDescobertaServico;
 import endereco.service.resource.EnderecoResource;
-
-import org.skife.jdbi.v2.DBI;
-
-import server.integracao.BundleIntegracao;
 
 public class EnderecoService extends Service<ConfiguracaoBase> {
 
@@ -36,7 +35,7 @@ public class EnderecoService extends Service<ConfiguracaoBase> {
     @Override
     public void run(ConfiguracaoBase configuration, Environment environment) throws Exception {
         DBIFactory dbiFactory = new DBIFactory();
-        DBI dbi = dbiFactory.build(environment, configuration.getDatabaseConfiguration(), Constantes.POSTGRESQL);
+		DBI dbi = dbiFactory.build(environment, configuration.getDatabaseConfiguration(), "postgresql");
         environment.addResource(new EnderecoResource(dbi));
     }
 
